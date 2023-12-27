@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import java.util.Calendar
+import java.util.TimeZone
 
 class MainActivity : AppCompatActivity() {
     private lateinit var textViewDay: TextView
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun updateDay(){
         val c = Calendar.getInstance()
-        var timeInt = (c.getTimeInMillis() / (1000 * 60 * 60 * 24)).toInt()
+        var timeInt = ((TimeZone.getDefault().rawOffset + c.getTimeInMillis()) / (1000 * 60 * 60 * 24)).toInt()
         var isOddDay = timeInt % 2
         if(isOddDay == 1){
             textViewDay.setText("\"A\"\nday")
